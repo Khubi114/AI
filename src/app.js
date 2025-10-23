@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import InputForm from './components/InputForm';
-import Results from './components/Results';
+import Results from 'src/components/results.js';
 
 function App() {
   const [prediction, setPrediction] = useState(null);
