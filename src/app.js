@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import InputForm from './components/InputForm';
-import Results from 'src/components/results.js';
+import Results from './components/results.js';
+import { predict } from './services/api';
 
 function App() {
   const [prediction, setPrediction] = useState(null);
@@ -13,19 +14,7 @@ function App() {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch('http://localhost:8000/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-
-      const result = await response.json();
+      const result = await predict(formData);
       setPrediction(result);
     } catch (err) {
       setError(err.message);
