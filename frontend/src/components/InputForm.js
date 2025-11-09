@@ -53,7 +53,7 @@ const InputForm = ({ onSubmit, loading }) => {
             name="inputText"
             value={formData.inputText}
             onChange={handleChange}
-            placeholder="Enter text to analyze..."
+            placeholder="Enter text to analyze (minimum 10 characters)..."
             rows="4"
           />
           {errors.inputText && <span className="error">{errors.inputText}</span>}
@@ -67,14 +67,14 @@ const InputForm = ({ onSubmit, loading }) => {
             name="numericFeature"
             value={formData.numericFeature}
             onChange={handleChange}
-            placeholder="Enter a number"
+            placeholder="Enter a positive number"
             step="0.01"
           />
           {errors.numericFeature && <span className="error">{errors.numericFeature}</span>}
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? 'Processing...' : 'Analyze'}
+          {loading ? 'Analyzing...' : 'Analyze'}
         </button>
       </form>
     </section>

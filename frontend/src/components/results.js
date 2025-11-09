@@ -1,13 +1,13 @@
 import React from 'react';
-import BarChart from 'frontend/src/components/charts/barchar.js';
-import LineChart from 'frontend/src/components/charts/linechart.js';
-import PieChart from 'frontend/src/components/charts/piechart.js';
+import BarChart from './Charts/BarChart';
+import LineChart from './Charts/LineChart';
+import PieChart from './Charts/PieChart';
 
 const Results = ({ prediction, loading }) => {
   if (loading) {
     return (
       <section className="results">
-        <div className="loading">Analyzing data with AI model...</div>
+        <div className="loading">🔄 Analyzing data with AI model...</div>
       </section>
     );
   }
@@ -21,7 +21,7 @@ const Results = ({ prediction, loading }) => {
       <h2>Analysis Results</h2>
       
       <div className="prediction-summary">
-        <h3>Prediction: <span className={`prediction ${prediction.class}`}>
+        <h3>Prediction: <span className={`prediction ${prediction.predicted_class}`}>
           {prediction.predicted_class}
         </span></h3>
         <p>Confidence: <strong>{(prediction.confidence * 100).toFixed(2)}%</strong></p>

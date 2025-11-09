@@ -26,7 +26,6 @@ const PieChart = ({ data }) => {
           'rgba(255, 99, 132, 1)',
         ],
         borderWidth: 2,
-        hoverOffset: 15,
       },
     ],
   };
@@ -41,24 +40,7 @@ const PieChart = ({ data }) => {
         display: true,
         text: 'Threat Distribution',
       },
-      tooltip: {
-        callbacks: {
-          label: function(context) {
-            const label = context.label || '';
-            const value = context.raw || 0;
-            const total = context.dataset.data.reduce((acc, data) => acc + data, 0);
-            const percentage = Math.round((value / total) * 100);
-            return `${label}: ${percentage}%`;
-          }
-        }
-      }
     },
-    onClick: (event, elements) => {
-      if (elements.length > 0) {
-        const index = elements[0].index;
-        console.log(`Pie segment clicked: ${chartData.labels[index]}`);
-      }
-    }
   };
 
   return <Pie data={chartData} options={options} />;
