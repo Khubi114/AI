@@ -1,13 +1,11 @@
 # Cybersecurity AI Backend - Fixed Requirements
 # Compatible with Python 3.14 and newer
 
-fastapi==0.115.0
-uvicorn==0.34.0
-pydantic==2.9.2
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
 python-multipart==0.0.6
-numpy==2.2.0
-pandas==2.2.2
-python-dotenv==1.0.1
+numpy==1.24.3
 
 # For scikit-learn - use pre-built wheel version
 # Note: If scikit-learn fails, install numpy first, then scikit-learn separately

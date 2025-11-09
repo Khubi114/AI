@@ -1,7 +1,7 @@
 import React from 'react';
-import BarChart from './charts/barchar.js';
-import LineChart from './charts/linechart.js';
-import PieChart from './charts/piechart.js';
+import BarChart from 'frontend/src/components/charts/barchar.js';
+import LineChart from 'frontend/src/components/charts/linechart.js';
+import PieChart from 'frontend/src/components/charts/piechart.js';
 
 const Results = ({ prediction, loading }) => {
   if (loading) {
