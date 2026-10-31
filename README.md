@@ -1,245 +1,206 @@
-===========================================================
-           CYBERSECURITY AI DASHBOARD - FRONTEND
-===========================================================
+# Cybersecurity AI Dashboard
 
-A modern React.js frontend application for analyzing cybersecurity threats 
-using AI-powered predictions. This application provides an intuitive interface 
-for users to input data, view AI model predictions, and interact with 
-comprehensive data visualizations.
+A full-stack web application that uses AI to detect spam and malware. Users submit text and a numeric value through a React interface, a FastAPI backend returns predictions, and the results are shown as interactive charts.
 
-===========================================================
-FEATURES
-===========================================================
+## Table of Contents
 
-- Interactive Data Input Form with real-time validation
-- Multiple Chart Types (Bar, Line, Pie) with interactive features
-- Responsive Design optimized for desktop, tablet, and mobile
-- Real-time API Integration with FastAPI backend
-- Export Functionality for prediction results
-- Comprehensive Error Handling and user feedback
-- Accessibility Compliance with WCAG 2.1 AA standards
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [API Reference](#api-reference)
+- [Frontend Components](#frontend-components)
+- [Available Scripts](#available-scripts)
+- [Responsive Design](#responsive-design)
+- [Accessibility](#accessibility)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
 
-===========================================================
-PREREQUISITES
-===========================================================
+## Features
 
-Before running this application, ensure you have the following installed:
+- Input form with real-time validation
+- Bar, line and pie charts with interactive features
+- Responsive layout for desktop, tablet and mobile
+- Live integration with the FastAPI backend
+- Export of prediction results as JSON
+- Clear error handling and user feedback
+- WCAG 2.1 AA accessibility compliance
 
-- Node.js (version 14 or higher)
-- npm (version 6 or higher) or yarn
-- Backend API (FastAPI server running on http://localhost:8000)
+## Tech Stack
 
-===========================================================
-INSTALLATION
-===========================================================
+| Layer | Technology |
+| --- | --- |
+| Frontend | React, Chart.js, react-chartjs-2, Axios |
+| Backend | Python 3.12+, FastAPI, Uvicorn |
 
-1. Clone or Download the Project
-   -------------------------------------------------------
-   If using git:
-       git clone <repository-url>
-       cd cybersecurity-ai-dashboard/frontend
+## Project Structure
 
-   Or navigate manually to your project directory:
-       cd frontend
+```text
+AI/
+├── backend/     # FastAPI server (app.py, requirements.txt)
+├── frontend/    # React application
+└── README.md
+```
 
-2. Install Dependencies
-   -------------------------------------------------------
-       npm install
+## Prerequisites
 
-   This installs:
-   - react & react-dom (Core React framework)
-   - chart.js & react-chartjs-2 (Data visualization)
-   - axios (HTTP client for API communication)
+- Node.js 14 or higher
+- npm 6 or higher (or yarn)
+- Python 3.12 or higher ([python.org](https://www.python.org/downloads/)). During installation on Windows, tick **Add Python to PATH**.
 
-===========================================================
-RUNNING THE APPLICATION
-===========================================================
+## Getting Started
 
-DEVELOPMENT MODE
-   -------------------------------------------------------
-       npm start
+The backend must be running before the frontend can make predictions, so set it up first.
 
-   This will:
-   - Start the development server
-   - Open your browser at http://localhost:3000
-   - Enable hot-reload for instant updates
-   - Show detailed error messages and warnings
+### 1. Backend
 
-PRODUCTION BUILD
-   -------------------------------------------------------
-       npm run build
+From the `backend` folder:
 
-   Creates an optimized production build in the "build/" folder.
+```bash
+# Create a virtual environment
+python -m venv venv
 
-TESTING
-   -------------------------------------------------------
-       npm test
+# Activate it
+venv\Scripts\activate          # Windows
+source venv/bin/activate       # macOS / Linux
 
-   Launches the test runner in interactive watch mode.
+# Install dependencies
+pip install -r requirements.txt
 
-===========================================================
-CONFIGURATION
-===========================================================
+# Start the server
+python app.py
+```
 
-ENVIRONMENT VARIABLES
-   -------------------------------------------------------
-   Create a ".env" file in the root directory and include:
+You should see `(venv)` at the start of your command line once the environment is active. When the server is ready it prints:
 
-       REACT_APP_API_BASE_URL=http://localhost:8000
-       REACT_APP_APP_NAME=Cybersecurity AI Dashboard
+```text
+INFO:     Uvicorn running on http://127.0.0.1:8000
+```
 
-API CONFIGURATION
-   -------------------------------------------------------
-   The application connects to a FastAPI backend running at:
-       http://localhost:8000
+Keep this terminal open. To check that it works, open [http://localhost:8000/docs](http://localhost:8000/docs) for the interactive API documentation. Press `Ctrl + C` to stop the server.
 
-   Ensure your backend is active before using prediction features.
+**Next time**, you only need to activate the virtual environment and run `python app.py` again.
 
-===========================================================
-COMPONENT OVERVIEW
-===========================================================
+### 2. Frontend
 
-InputForm Component
-   -------------------------------------------------------
-   - Captures and validates user input
-   - Real-time validation and error display
-   - Loading state management
-   - Fully accessible (ARIA, keyboard navigation)
+From the `frontend` folder:
 
-Visualization Components
-   -------------------------------------------------------
-   - BarChart: Displays prediction probabilities across threat categories
-   - LineChart: Shows confidence trends over time
-   - PieChart: Visualizes threat distribution percentages
+```bash
+npm install
+npm start
+```
 
-Results Component
-   -------------------------------------------------------
-   - Displays AI model predictions and visual charts
-   - Includes export functionality
-   - Uses responsive grid layout
+The app opens at [http://localhost:3000](http://localhost:3000) with hot-reload enabled.
 
-===========================================================
-API INTEGRATION
-===========================================================
+Dependencies installed include `react` and `react-dom` (core framework), `chart.js` and `react-chartjs-2` (charts), and `axios` (API requests).
 
-Endpoints Used
-   -------------------------------------------------------
-   POST /predict  -> Submit data for AI analysis
+## Configuration
 
-   Example Request:
-   {
-       "inputText": "User provided text for analysis",
-       "numericFeature": 42.5
-   }
+Create a `.env` file in the `frontend` folder:
 
-Response Handling
-   -------------------------------------------------------
-   The application processes responses from the backend and updates 
-   all visualization components accordingly with error handling.
+```env
+REACT_APP_API_BASE_URL=http://localhost:8000
+REACT_APP_APP_NAME=Cybersecurity AI Dashboard
+```
 
-===========================================================
-RESPONSIVE DESIGN
-===========================================================
+If you run the backend on a different port, update `REACT_APP_API_BASE_URL` to match.
 
-Breakpoints:
-   - Desktop:  > 1200px (3-column layout)
-   - Tablet:   768px - 1199px (2-column layout)
-   - Mobile:   < 768px (1-column layout)
+## Usage
 
-===========================================================
-ACCESSIBILITY FEATURES
-===========================================================
+1. Start the backend, then the frontend (see [Getting Started](#getting-started)).
+2. Open [http://localhost:3000](http://localhost:3000).
+3. Enter some input text (minimum 10 characters).
+4. Enter a numeric value (positive number).
+5. Click **Analyze** to submit the data.
+6. View the predictions and charts.
+7. Click the export button to download the results as JSON.
+
+## API Reference
+
+### `POST /predict`
+
+Submits data for AI analysis.
+
+**Request**
+
+```json
+{
+  "inputText": "User provided text for analysis",
+  "numericFeature": 42.5
+}
+```
+
+The frontend processes the response, updates all charts and shows an error message if the request fails. You can also test every endpoint from the interactive docs at [http://localhost:8000/docs](http://localhost:8000/docs).
+
+## Frontend Components
+
+| Component | Purpose |
+| --- | --- |
+| `InputForm` | Captures and validates input, shows errors and loading state, fully keyboard and screen reader accessible |
+| `BarChart` | Prediction probabilities across threat categories |
+| `LineChart` | Confidence trends over time |
+| `PieChart` | Threat distribution percentages |
+| `Results` | Displays predictions and charts in a responsive grid, with export |
+
+## Available Scripts
+
+Run these from the `frontend` folder.
+
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the development server |
+| `npm run build` | Create an optimized production build in `build/` |
+| `npm test` | Run the test runner in interactive watch mode |
+| `npm run eject` | Expose the build configuration (irreversible) |
+
+## Responsive Design
+
+| Screen | Width | Layout |
+| --- | --- | --- |
+| Desktop | > 1200px | 3 columns |
+| Tablet | 768px to 1199px | 2 columns |
+| Mobile | < 768px | 1 column |
+
+## Accessibility
 
 - Semantic HTML structure
 - ARIA labels and descriptions
-- Keyboard navigation support
+- Keyboard navigation
 - Screen reader compatibility
 - Color contrast compliance
 - Focus management
 
-===========================================================
-TROUBLESHOOTING
-===========================================================
+## Troubleshooting
 
-Common Issues
-   -------------------------------------------------------
-   Application won’t start:
-       npm cache clean --force
-       rm -rf node_modules
-       npm install
+**Backend**
 
-   Charts not displaying:
-       Ensure Chart.js and react-chartjs-2 are installed.
-       Check browser console for errors.
+| Problem | Solution |
+| --- | --- |
+| `python` not found | Install Python from [python.org](https://www.python.org/downloads/) and tick **Add Python to PATH** during installation |
+| `ModuleNotFoundError` | Make sure the virtual environment is activated (you should see `(venv)` in the command line) |
+| Port 8000 in use | Run `python -m uvicorn app:app --port 8001` and open [http://localhost:8001/docs](http://localhost:8001/docs). Update `REACT_APP_API_BASE_URL` in the frontend to match |
+| Can't connect to `localhost:8000` | Check that the backend terminal is still running and shows `Uvicorn running on...`. If not, start it with `python app.py` |
 
-   API connection errors:
-       Verify backend server is active (http://localhost:8000)
-       Check CORS settings in backend
-       Confirm network connectivity
+**Frontend**
 
-   Build errors:
-       Update Node.js to the latest supported version
-       Clear build cache:
-           npm run build --silent
+| Problem | Solution |
+| --- | --- |
+| App won't start | Run `npm cache clean --force`, delete `node_modules`, then run `npm install` again |
+| Charts not displaying | Confirm `chart.js` and `react-chartjs-2` are installed and check the browser console for errors |
+| API connection errors | Check the backend is running at `http://localhost:8000`, that CORS is configured in the backend, and that your network is working |
+| Build errors | Update Node.js to the latest supported version and clear the build cache |
 
-Development Tips
-   -------------------------------------------------------
-   - Use React Developer Tools for debugging
-   - Check console and network tab for API inspection
-   - Hot-reload enables fast feedback during development
+Tips: React Developer Tools and the browser's console and network tabs are the quickest way to inspect API calls.
 
-===========================================================
-PERFORMANCE OPTIMIZATION
-===========================================================
+## Contributing
 
-- Memoization for preventing unnecessary chart re-renders
-- Efficient React state management
-- Code splitting for production
-- Optimized bundle size
-- Lazy loading support
+1. Follow React hooks and best practices.
+2. Keep a consistent code style with ESLint.
+3. Make sure all components are accessible and responsive.
+4. Test across multiple browsers and devices.
+5. Update this README when you add features.
 
-===========================================================
-CONTRIBUTING
-===========================================================
-
-When contributing:
-
-1. Follow React hooks and best practices
-2. Maintain consistent code style using ESLint
-3. Ensure all components are accessible and responsive
-4. Test across multiple browsers and devices
-5. Update this README for any new features
-
-===========================================================
-NPM SCRIPTS OVERVIEW
-===========================================================
-
-   npm start       -> Start development server
-   npm run build   -> Create production build
-   npm test        -> Run test suite
-   npm run eject   -> Expose configuration (irreversible)
-
-===========================================================
-USAGE EXAMPLE
-===========================================================
-
-1. Start the application:
-       npm start
-2. Open your browser at:
-       http://localhost:3000
-3. Enter input text (minimum 10 characters)
-4. Provide a numeric value (positive number)
-5. Click "Analyze" to submit data
-6. View predictions and charts
-7. Export results as JSON using the export button
-
-===========================================================
-SUPPORT
-===========================================================
-
-For technical help:
-
-1. Check browser console for errors
-2. Verify dependencies are installed
-3. Ensure backend API is running
-4. Review configuration steps in this README
+Performance notes: chart re-renders are memoized, state management is kept lean, and production builds use code splitting and lazy loading.
